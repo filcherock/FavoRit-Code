@@ -1,10 +1,14 @@
 import sys
 import os
+import re
 
 from tkinter import *
 from tkinter.ttk import *
 from customtkinter import *
 from pickledb import PickleDB
+from fileAction import *
+
+from proglang import *
 
 config = PickleDB('config.json')
 
@@ -16,25 +20,44 @@ def scroll_command(*args):
     text.yview(*args)
     numbers.yview(*args)
 
-app = Tk()
+app = CTk()
 app.config(relief='flat', border=0, borderwidth=0)
 
 numbers = Text(app, width=4, bg='lightgray', state=DISABLED, relief=FLAT, font=config.get('font'), 
-                background="#303030", foreground=config.get('fg'),
-                selectbackground="#303030", selectforeground="#FFFFFF", 
+                background="#292929", foreground=config.get('num_color'),
+                selectbackground="#292929", selectforeground="#FFFFFF", 
                 highlightthickness=0,
-                highlightbackground="#303030", highlightcolor="#303030", undo=False, insertbackground="#303030",
-                insertborderwidth=0, inactiveselectbackground="#303030")
+                highlightbackground="#292929", highlightcolor="#292929", undo=False, insertbackground="#292929",
+                insertborderwidth=0, inactiveselectbackground="#292929", borderwidth=10)
 numbers.grid(row=0, column=0, sticky='NS')
 
-scroll = Scrollbar(app)
+scroll = CTkScrollbar(app, bg_color="#303030", command=scroll_command)
 scroll.grid(row=0, column=2, sticky='NS')
 
-text = Text(app, yscrollcommand=on_yscrollcommand, wrap=NONE, font=config.get('font'), bg="#303030", foreground=config.get('fg'),
-            relief='flat', border=0, borderwidth=0, undo=True, insertbackground='#FFFFFF', insertwidth=1)
+text = Text(app, yscrollcommand=on_yscrollcommand, wrap=NONE, font=config.get('font'), bg=config.get('bg'), foreground=config.get('fg'),
+            relief='flat', border=0, borderwidth=10, undo=True, insertbackground='#FFFFFF', insertwidth=1, highlightbackground="#303030",
+            highlightcolor="#303030")
 text.grid(row=0, column=1, sticky='NSWE')
 
-scroll.config(command=scroll_command)
+#scroll.config(command=scroll_command)
+
+menubar = Menu(app, tearoff=False, bg='#292929', fg='white', activebackground="#7F0D83", activeforeground='white', border=0,activeborderwidth=0)
+
+file = Menu(menubar, tearoff=False, bg='#292929', fg='white', activebackground="#7F0D83", activeforeground='white', border=0, activeborderwidth=0) 
+file.add_command(label="New file", command=lambda: print(1), accelerator="      CTRL-N")
+file.add_command(label="Open file", command=lambda: openFile(app, text), accelerator="     CTRL-O")
+file.add_command(label="Close file", command=lambda: print(1), accelerator="    CTRL-W")
+file.add_separator()
+file.add_command(label="Open Folder", command=lambda: print(1), accelerator="      CTRL-SHIFT-O")
+file.add_separator()
+file.add_command(label="Save file", command=lambda: print(1), accelerator="    CTRL-S") 
+file.add_command(label="Save file as", command=lambda: print(1), accelerator="    CTRL-SHIFT-S") 
+file.add_separator()
+file.add_command(label="Exit", command=app.quit, accelerator="   ALT-F4") 
+
+menubar.add_cascade(label="File", menu=file) 
+
+app.config(menu=menubar, relief='flat', border=0, borderwidth=0)
 
 def insert_numbers():
     count_of_lines = text.get(1.0, END).count('\n') + 1
@@ -49,15 +72,44 @@ def on_edit(event):
     insert_numbers()
     text.edit_modified(0)
 
-def set_focus():
-    text.focus_set()
-    app.after(100, set_focus)
+def changes(event=None):
+    global ptext
+
+    current_text = text.get('1.0', 'end-1c')  # Убираем конечный символ переноса строки, чтобы сравнить точнее
+    if current_text == ptext:
+        return
+
+    for tag in text.tag_names():
+        text.tag_remove(tag, '1.0', 'end')
+
+    i = 0
+    for pattern, color in repl:
+        for start, end in search_re(pattern, current_text):
+            tag_name = f"tag{i}"
+            text.tag_add(tag_name, start, end)
+            text.tag_config(tag_name, foreground=color)
+            i += 1
+
+    ptext = current_text
+
+def search_re(pat, text):
+    matches = []
+    lines = text.splitlines()
+
+    pattern_compiled = re.compile(pat)
+    for i, line in enumerate(lines):
+        for match in pattern_compiled.finditer(line):
+            start_index = f"{i + 1}.{match.start()}"
+            end_index = f"{i + 1}.{match.end()}"
+            matches.append((start_index, end_index))
+    return matches
 
 text.bind('<<Modified>>', on_edit)
+app.bind('<KeyRelease>', changes)
 
 app.grid_columnconfigure(1, weight=1)
 app.grid_rowconfigure(0, weight=1)
 
 if __name__ == '__main__':
-    set_focus()
+    app.title("FavoRit Code")
     app.mainloop()
