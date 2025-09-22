@@ -1,4 +1,5 @@
 from tkinter.filedialog import *
+from tkinter import *
 
 ftypes = [(u'All files', '*'), (u'Text file', '*.txt'), (u'Python', '*.py'), (u'C++', '*.cpp'), (u'C#', '*.cs'),
         (u'Java', '*.java')]
@@ -14,4 +15,8 @@ def saveFile(app, editArea):
     pass
 
 def saveAsFile(app, editArea):
-    pass
+    fn = asksaveasfilename(filetypes=ftypes)
+    if fn: 
+        with open(fn, 'w', encoding='UTF-8') as f:
+            text = editArea.get("1.0", END)
+            f.write(text) 

@@ -51,13 +51,21 @@ file.add_separator()
 file.add_command(label="Open Folder", command=lambda: print(1), accelerator="      CTRL-SHIFT-O")
 file.add_separator()
 file.add_command(label="Save file", command=lambda: print(1), accelerator="    CTRL-S") 
-file.add_command(label="Save file as", command=lambda: print(1), accelerator="    CTRL-SHIFT-S") 
+file.add_command(label="Save file as", command=lambda: saveAsFile(app, text), accelerator="    CTRL-SHIFT-S") 
 file.add_separator()
 file.add_command(label="Exit", command=app.quit, accelerator="   ALT-F4") 
 
+edit = Menu(menubar, tearoff=False, bg='#292929', fg='white', activebackground="#7F0D83", activeforeground='white', border=0, activeborderwidth=0) 
+edit.add_command(label="Undo", command=text.edit_undo, accelerator="      CTRL-Z")
+edit.add_command(label="Repo", command=text.edit_redo, accelerator="      CTRL-Y")
+
 menubar.add_cascade(label="File", menu=file) 
+menubar.add_cascade(label="Edit", menu=edit)
 
 app.config(menu=menubar, relief='flat', border=0, borderwidth=0)
+
+infoPanel = Frame(app, height=20)
+frcodeLabel = Label(infoPanel, text="FavoRit Code", background=config.get('bg'), foreground=config.get('fg'))
 
 def insert_numbers():
     count_of_lines = text.get(1.0, END).count('\n') + 1
