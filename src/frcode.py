@@ -9,6 +9,7 @@ from pickledb import PickleDB
 from fileAction import *
 
 from proglang import *
+from fileAction import isEdit, newFile, cur_path, changeTitle
 
 config = PickleDB('config.json')
 
@@ -50,7 +51,7 @@ file.add_command(label="Close file", command=lambda: print(1), accelerator="    
 file.add_separator()
 file.add_command(label="Open Folder", command=lambda: print(1), accelerator="      CTRL-SHIFT-O")
 file.add_separator()
-file.add_command(label="Save file", command=lambda: print(1), accelerator="    CTRL-S") 
+file.add_command(label="Save file", command=lambda: saveFile(app, text), accelerator="    CTRL-S") 
 file.add_command(label="Save file as", command=lambda: saveAsFile(app, text), accelerator="    CTRL-SHIFT-S") 
 file.add_separator()
 file.add_command(label="Exit", command=app.quit, accelerator="   ALT-F4") 
@@ -83,7 +84,7 @@ def on_edit(event):
 def changes(event=None):
     global ptext
 
-    current_text = text.get('1.0', 'end-1c')  # Убираем конечный символ переноса строки, чтобы сравнить точнее
+    current_text = text.get('1.0', 'end-1c')
     if current_text == ptext:
         return
 
@@ -99,6 +100,14 @@ def changes(event=None):
             i += 1
 
     ptext = current_text
+
+    if newFile != False:
+        if isEdit != True:
+            changeTitle(app, f"FavoRit Code - {cur_path}", "*")
+        else:
+            changeTitle(app, f"FavoRit Code - {cur_path}", "")
+    else:
+        pass
 
 def search_re(pat, text):
     matches = []
