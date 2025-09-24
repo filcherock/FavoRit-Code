@@ -1,6 +1,8 @@
 # FavoRit Code
 Welcome to the FavoRit Code repository.
 
+<img src="/docs/readme-images/fr-preview.png">
+
 # Content
 - [About the project](#about-the-project)
 - [Program function](#program-function)
