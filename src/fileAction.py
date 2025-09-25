@@ -8,9 +8,9 @@ cur_path = ''
 isEdit = False
 newFile = True
 
-def changeTitle(app, text, param):
+def changeTitle(app, param):
     global cur_path
-    app.title(f"{text}{param}")
+    app.title(f"FavoRit Code - {cur_path}{param}")
 
 def closeFile(app, editArea):
     global cur_path

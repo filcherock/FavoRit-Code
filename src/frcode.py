@@ -9,7 +9,7 @@ from pickledb import PickleDB
 from fileAction import *
 
 from proglang import *
-from fileAction import isEdit, newFile, cur_path, changeTitle
+from fileAction import isEdit, newFile, changeTitle
 
 config = PickleDB('config.json')
 
@@ -24,21 +24,40 @@ def scroll_command(*args):
 app = CTk()
 app.config(relief='flat', border=0, borderwidth=0)
 
+fileSwitch = Notebook(app, style='Dark.TNotebook')
+
+style = Style()
+style.configure('Dark.TNotebook', background='#292929', bordercolor='#292929')
+style.configure('Dark.TNotebook.Tab', background='#292929', foreground='white', borderwidth=0)
+style.configure('Dark.TNotebook.Tab', padding=[5, 2])
+style.map('Dark.TNotebook.Tab', background=[('selected', "#606060")], foreground=[('selected', 'white')])
+
+
+fileChild = Frame(fileSwitch)
+fileChild.configure(bg=config.get('bg'))
+fileSwitch.add(fileChild, text="main.py")
+
+style.configure('TFrame', background=config.get('bg'))
+fileSwitch.pack(side='top', fill='x')
+
+bottom_frame = Frame(app)  # Обернём numbers, text и scroll в контейнер
+bottom_frame.pack(side='top', fill='both', expand=True)
+
 numbers = Text(app, width=4, bg='lightgray', state=DISABLED, relief=FLAT, font=config.get('font'), 
                 background="#292929", foreground=config.get('num_color'),
                 selectbackground="#292929", selectforeground="#FFFFFF", 
                 highlightthickness=0,
                 highlightbackground="#292929", highlightcolor="#292929", undo=False, insertbackground="#292929",
                 insertborderwidth=0, inactiveselectbackground="#292929", borderwidth=10)
-numbers.grid(row=0, column=0, sticky='NS')
-
-scroll = CTkScrollbar(app, bg_color="#303030", command=scroll_command)
-scroll.grid(row=0, column=2, sticky='NS')
+numbers.pack(in_=bottom_frame, side='left', fill='y')
 
 text = Text(app, yscrollcommand=on_yscrollcommand, wrap=NONE, font=config.get('font'), bg=config.get('bg'), foreground=config.get('fg'),
             relief='flat', border=0, borderwidth=10, undo=True, insertbackground='#FFFFFF', insertwidth=1, highlightbackground="#303030",
             highlightcolor="#303030")
-text.grid(row=0, column=1, sticky='NSWE')
+text.pack(in_=bottom_frame, side='left', fill='both', expand=True)
+
+scroll = CTkScrollbar(app, bg_color="#303030", command=scroll_command)
+scroll.pack(in_=bottom_frame, side='left', fill='y')
 
 #scroll.config(command=scroll_command)
 
@@ -47,7 +66,7 @@ menubar = Menu(app, tearoff=False, bg='#292929', fg='white', activebackground="#
 file = Menu(menubar, tearoff=False, bg='#292929', fg='white', activebackground="#7F0D83", activeforeground='white', border=0, activeborderwidth=0) 
 file.add_command(label="New file", command=lambda: print(1), accelerator="      CTRL-N")
 file.add_command(label="Open file", command=lambda: openFile(app, text), accelerator="     CTRL-O")
-file.add_command(label="Close file", command=lambda: print(1), accelerator="    CTRL-W")
+file.add_command(label="Close file", command=lambda: closeFile(app, text), accelerator="    CTRL-W")
 file.add_separator()
 file.add_command(label="Open Folder", command=lambda: print(1), accelerator="      CTRL-SHIFT-O")
 file.add_separator()
@@ -101,11 +120,11 @@ def changes(event=None):
 
     ptext = current_text
 
-    if newFile != False:
+    if newFile != True:
         if isEdit != True:
-            changeTitle(app, f"FavoRit Code - {cur_path}", "*")
+            changeTitle(app, "*")
         else:
-            changeTitle(app, f"FavoRit Code - {cur_path}", "")
+            changeTitle(app, "")
     else:
         pass
 
