@@ -1,10 +1,12 @@
-<h1 align="center">FavoRit Code</h1>
+<div align="center">
+<h1>FavoRit Code</h1>
 
 [![License: GPL](https://img.shields.io/badge/License-GPL-yellow.svg)](#)
 [![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](#)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](#)
 
 <img src="/docs/readme-images/fr-preview.png">
+</div>
 
 # Content
 - [About the project](#about-the-project)
