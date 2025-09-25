@@ -1,5 +1,8 @@
-# FavoRit Code
-Welcome to the FavoRit Code repository.
+<h1 align="center">FavoRit Code</h1>
+
+[![License: GPL](https://img.shields.io/badge/License-GPL-yellow.svg)](#)
+[![Version](https://img.shields.io/badge/version-0.0.1-blue.svg)](#)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](#)
 
 <img src="/docs/readme-images/fr-preview.png">
 
@@ -11,10 +14,10 @@ Welcome to the FavoRit Code repository.
 - [License](#license)
 
 # About the project
-FavoRit Code is a source code editor developed by Filcher for Windows and Linux. It's positioned as a simple yet powerful code editor for a variety of tasks, from writing console programs to creating cloud applications. It supports syntax highlighting, Git support, and other features. FavoRit Code is also easy to customize. The documentation includes a dedicated section for creating your own theme, custom syntax highlighting, and more. The program is distributed under the license of the State Scientific Institution General Public License v3.0.
+FavoRit Code is a source code editor developed by Filcher for Windows and Linux. It's positioned as a simple yet powerful code editor for a variety of tasks, from writing console programs to creating cloud applications. It supports syntax highlighting, Git support, and other features. FavoRit Code is also easy to customize. The documentation includes a dedicated section for creating your own theme, custom syntax highlighting, and more. The program is distributed under the license of the GNU General Public License v3.0.
 
 # Program function
-Below is a tree of functions that are available in Favorite Code as of the last update.
+Below is a tree of functions that are available in FavoRit Code as of the last update.
 - Working with files
 - Syntax highlighting
 - Line numbering
@@ -39,4 +42,4 @@ python src/frcode.py
 ```
 
 # License
-FavoRit Code is licensed under the GNU General Public License v3.0.
+FavoRit Code is licensed under the [GNU General Public License v3.0](https://github.com/filcherock/FavoRit-Code/blob/master/LICENSE). The GNU GPL license covers not only the program itself, but also all add-ons, extensions, packs, custom themes, and custom builds of the source code editor based on FavoRit Code.
