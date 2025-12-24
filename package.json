@@ -1,0 +1,27 @@
+{
+  "name": "favorit-code",
+  "version": "1.1.0",
+  "description": "",
+  "homepage": "https://github.com/filcherock/FavoRit-Code#readme",
+  "bugs": {
+    "url": "https://github.com/filcherock/FavoRit-Code/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filcherock/FavoRit-Code.git"
+  },
+  "license": "MIT",
+  "author": "filcher",
+  "type": "commonjs",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "codemirror": "^5.65.20",
+    "electron": "^39.2.7",
+    "monaco-editor": "^0.55.1",
+    "monaco-editor-webpack-plugin": "^7.1.1"
+  }
+}

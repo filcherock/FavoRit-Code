@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --titleBarBackground: #1c1c1c;
+    --titleButtonsIsHover: #2c2c2c;
+    --titleBarForeground: #ededed;
+
+    --codeEditorBg: #303030;
+    --codeEditorFg: #FFFFFF;
+
+    --codeEditorNumBg: #292929;
+    --codeEditorNumFg: #9fb0c8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #121212;
+    color: var(--titleBarForeground);
+    padding: 0;
+    margin: 0;
+}
+
+nav {
+    border: 1px solid #2c2c2c;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    background: var(--titleBarBackground);
+}
+
+#title {
+    user-select: none;
+    margin-left: 10px;
+    -webkit-app-region: drag;
+    font-family: Inter;
+    font-weight: 600;
+}
+
+:not(nav) {
+    -webkit-app-region: no-drag;
+}
+
+.nav-btns {
+    margin-left: auto;
+    height: 100%;
+    display: flex;
+}
+
+.nav-btns > button {
+    transition: background .2s ease;
+    background: var(--titleBarBackground);
+    border: none;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: 1;
+    color: var(--titleBarForeground);
+    font-size: 17px;
+}
+
+.nav-btns > button:hover {
+    transition: .2s ease;
+    background: var(--titleButtonsIsHover);
+    cursor: pointer;
+}
+
+.nav-btns > button:active {
+    background: #4c4c4c;
+}
+
+.workPanel {
+    width: 100%;
+    height: calc(100vh - 35px); /* Высота редактора */
+    border: none;
+}
+
+textarea.editor {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    resize: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+}

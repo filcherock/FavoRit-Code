@@ -1,0 +1,61 @@
+.cm-keyword { color: #ea5f5f !important; font-weight: bold !important; }
+.cm-string { color: #eaa25f !important; }
+.cm-comment { color: gray !important; font-style: italic !important; }
+.cm-number { color: rgb(86, 117, 165) !important; }
+.cm-variable { color: var(--codeEditorFg) !important; }
+.cm-def { color: #9fb0c8; }
+
+
+.CodeMirror {
+    height: 100%;
+    width: 100%;
+    background: #1E212B;
+    color: #fff;
+    font-size: 18px;
+    font-family: Consolas, 'Courier New', monospace;
+    line-height: 1.45;
+}
+
+.CodeMirror-gutters {
+    background: #1E212B;
+    color: #9fb0c8;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.CodeMirror-hints {
+    background: #222631 !important;  
+    font-size: 18px;
+    font-family: Consolas, 'Courier New', monospace;
+    width: 200px;
+    color: #fff !important;
+    border: none !important;      
+    box-shadow: none !important;  
+    outline: none !important;        
+    border-radius: 0 !important;
+    padding: 0 !important;
+}
+
+.CodeMirror-hint {
+    background: transparent !important; 
+    color: inherit !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.CodeMirror-hint-active, .CodeMirror-hint:hover {
+    background: rgba(255,255,255,0.06) !important;
+    color: #fff !important;
+}
+
+.CodeMirror-hints::-webkit-scrollbar { background: transparent; }
+.CodeMirror-hints:focus { outline: none !important; }
+
+.CodeMirror-activeline-background { background: rgba(255,255,255,0.02); }
+.CodeMirror-selected { background: rgba(100,140,180,0.12); }
+.CodeMirror-cursor { border-left: 1.5px solid #ffd166; }
+
+.CodeMirror pre {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
