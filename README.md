@@ -1,5 +1,5 @@
 <p align="center"><img src="texture/icon.svg" width="80px"></p>
-<h1 align="center">Favorit Code</h1>
+<h1 align="center">FavoRit Code</h1>
 
 <div align="center">
 
