@@ -9,12 +9,8 @@
 
 </div>
 
-<br>
-
 # Screenshot
 <img src="assets/readme1-frcode.png">
-
-<br>
 
 # Download
 ```bash
@@ -30,8 +26,6 @@ npm install
 # Start FavoRit Code
 npm start
 ```
-
-<br>
 
 # License
 FavoRit Code is licensed under the MIT License
