@@ -1,4 +1,4 @@
-var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+export var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
     lineNumbers: true,
     autocorrect: true,
     dragDrop: true,

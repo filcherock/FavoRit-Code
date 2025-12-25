@@ -1,4 +1,6 @@
-const { ipcMain, ipcRenderer } = require("electron");
+import { editor } from "../code.js";
+
+const { ipcRenderer } = require("electron");
 const ipc = ipcRenderer;
 
 document.querySelector("#minimize").addEventListener("click", () => {
@@ -62,8 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     
     dropdownItems.forEach(item => {
-        item.addEventListener('click', () => {
-            alert(item.textContent + ' clicked');
-        });
+    item.addEventListener('click', async () => {
+        if (item.textContent === 'Open File') {
+            const result = await ipc.invoke("openFile"); // Используем ipc.invoke
+            editor.setValue(result.content);
+        }
     });
+});
 });
