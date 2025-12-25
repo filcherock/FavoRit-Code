@@ -50,22 +50,40 @@ ipcMain.handle('openFile', async () => {
         properties: ['openFile'],
         filters: [
             { name: 'Python', extensions: ['py'] },
+            { name: 'Text', extensions: ['txt'] },
             { name: 'All Files', extensions: ['*'] }
         ]
     });
 
     if (result.canceled) {
-        return null; // Если диалог был отменен, возвращаем null
+        return null; 
     }
     const filePath = result.filePaths[0];
     try {
-        const content = await fs.readFile(filePath, 'utf-8'); // Читаем файл
-        return { path: filePath, content }; // Возвращаем путь и содержимое файла
+        const content = await fs.readFile(filePath, 'utf-8'); 
+        return { filePath, content }; 
     } catch (error) {
         console.error('Error reading file:', error);
-        return null; // В случае ошибки возвращаем null
+        return null;
     }
 });
+
+ipcMain.handle('saveFile', async () => {
+    const result = await dialog.showSaveDialog({
+        title: 'Сохранить файл',
+        defaultPath: 'example.txt',
+        filters: [
+            { name: 'Python', extensions: ['py'] },
+            { name: 'Text', extensions: ['txt'] },
+            { name: 'All Files', extensions: ['*'] }
+        ]
+    });
+    if (result.canceled) {
+        return null; 
+    }
+    return result.filePath;
+});
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

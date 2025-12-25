@@ -1,7 +1,10 @@
 import { editor } from "../code.js";
 
 const { ipcRenderer } = require("electron");
+const fs = require('fs').promises;
 const ipc = ipcRenderer;
+
+let openedFile = '';
 
 document.querySelector("#minimize").addEventListener("click", () => {
     ipc.send("manualMinimize");
@@ -39,19 +42,15 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', (event) => {
             const dropdown = event.target.nextElementSibling;
 
-            // Закрыть другие открытые меню
             document.querySelectorAll('.dropdown-content').forEach(content => {
                 if (content !== dropdown) {
                     content.style.display = 'none';
                 }
             });
-
-            // Переключить текущее выпадающее меню
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         });
     });
 
-    // Закрытие выпадающих меню при клике вне их
     window.addEventListener('click', (event) => {
         if (!event.target.classList.contains('menuBtn')) {
             document.querySelectorAll('.dropdown-content').forEach(content => {
@@ -60,14 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Обработчики событий для кнопок внутри выпадающих меню
     const dropdownItems = document.querySelectorAll('.dropdown-item');
     
     dropdownItems.forEach(item => {
     item.addEventListener('click', async () => {
         if (item.textContent === 'Open File') {
-            const result = await ipc.invoke("openFile"); // Используем ipc.invoke
+            const result = await ipc.invoke("openFile");
             editor.setValue(result.content);
+            openedFile = result.filePath;
+        } else if (item.textContent === 'Save As...') {
+            const result = await ipc.invoke('saveFile');
+            fs.writeFile(result, editor.getValue())
+            openedFile = result;
+        } else if (item.textContent === 'Save File') {
+            if (openedFile === '') {
+                const result = await ipc.invoke('saveFile');
+                fs.writeFile(result, editor.getValue())
+                openedFile = result;
+            } else {
+                fs.writeFile(openedFile, editor.getValue())
+            }
         }
     });
 });

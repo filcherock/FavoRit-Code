@@ -153,13 +153,13 @@ textarea.editor {
     user-select: none;
     background: var(--titleBarBackground);
     color: var(--titleBarForeground);
-    padding: 8px 6px;  /* Увеличить высоту кнопки */
+    padding: 8px 6px;  
     text-decoration: none;
     display: block;
     border: none;
     background: none;
     cursor: pointer;
-    width: 100%; /* Убедитесь, что кнопка занимает всю ширину */
+    width: 100%; 
     text-align: left;
     margin-left: 5px;
     font-size: 13px;
