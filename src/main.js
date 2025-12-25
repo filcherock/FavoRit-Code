@@ -1,4 +1,5 @@
-const { BrowserWindow, app, ipcMain } = require('electron')
+const { BrowserWindow, app, ipcMain, dialog } = require('electron')
+const fs = require('fs')
 
 let win;
 const createWindow = () => {
@@ -13,6 +14,7 @@ const createWindow = () => {
   })
 
   win.loadFile("src/editor/renderer/index.html");
+  // win.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
