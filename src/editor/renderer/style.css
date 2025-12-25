@@ -39,6 +39,23 @@ nav {
     font-weight: 600;
 }
 
+#titleBarModeChange {
+    transition: .2s ease;
+    background: var(--titleBarBackground);
+    color: var(--titleBarForeground);
+    font-size: 17px;
+    margin: 0;
+    aspect-ratio: 1;
+    border: none;
+    height: 100%;
+}
+
+#titleBarModeChange:hover {
+    transition: .2s ease;
+    background: var(--titleButtonsIsHover);
+    cursor: pointer;
+}
+
 :not(nav) {
     -webkit-app-region: no-drag;
 }
@@ -70,9 +87,36 @@ nav {
     background: #4c4c4c;
 }
 
+#fsMode {
+    height: 100%;
+    display: flex;
+}
+
+.menuBtn {
+    transition: background .2s ease;
+    background: var(--titleBarBackground);
+    border: none;
+    height: 100%;
+    margin: 0;
+    aspect-ratio: 1;
+    color: var(--titleBarForeground);
+    font-size: 14px;
+    width: 100%;
+}
+
+.menuBtn:hover {
+    transition: .2s ease;
+    background: var(--titleButtonsIsHover);
+    cursor: pointer;
+}
+
+.menuBtn:active {
+    background: #4c4c4c;
+}
+
 .workPanel {
     width: 100%;
-    height: calc(100vh - 35px); /* Высота редактора */
+    height: calc(100vh - 35px);
     border: none;
 }
 
@@ -89,4 +133,33 @@ textarea.editor {
     background: transparent;
     color: inherit;
     font: inherit;
+}
+
+.menu-item {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 16px 16px;  /* Увеличить высоту кнопки */
+    text-decoration: none;
+    display: block;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 100%; /* Убедитесь, что кнопка занимает всю ширину */
+}
+
+
+.dropdown-content button:hover {
+    background-color: #f1f1f1;
 }

@@ -13,7 +13,52 @@
 </head>
 <body>
     <nav id="titleBar" style="-webkit-app-region: drag">
-        <p id="title"><span style="color: #a90093;">Favo</span><span style="color: #6000a1;">Rit</span> Code</p>
+        <button id="titleBarModeChange"><i class="fa-regular fa-folder"></i></button>
+        <div id="decoMode">
+            <p id="title" style="font-size: 17px;"><span style="color: #a90093;">Favo</span><span style="color: #6000a1;">Rit</span> Code</p>
+        </div>
+        <div id="fsMode" style="display: none;">
+            <div class="menu-item">
+                <button class="menuBtn">File</button>
+                <div class="dropdown-content" style="display: none;">
+                    <button class="dropdown-item">Open File</button>
+                    <button class="dropdown-item">Save File</button>
+                    <button class="dropdown-item">Save As...</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <button class="menuBtn">Edit</button>
+                <div class="dropdown-content" style="display: none;">
+                    <button class="dropdown-item">Undo</button>
+                    <button class="dropdown-item">Redo</button>
+                    <button class="dropdown-item">Cut</button>
+                    <button class="dropdown-item">Copy</button>
+                    <button class="dropdown-item">Paste</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <button class="menuBtn">View</button>
+                <div class="dropdown-content" style="display: none;">
+                    <button class="dropdown-item">Zoom In</button>
+                    <button class="dropdown-item">Zoom Out</button>
+                    <button class="dropdown-item">Reset Zoom</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <button class="menuBtn">Setting</button>
+                <div class="dropdown-content" style="display: none;">
+                    <button class="dropdown-item">Preferences</button>
+                    <button class="dropdown-item">About</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <button class="menuBtn">Help</button>
+                <div class="dropdown-content" style="display: none;">
+                    <button class="dropdown-item">Documentation</button>
+                    <button class="dropdown-item">Support</button>
+                </div>
+            </div>
+        </div>
         <div class="nav-btns">
             <button id="minimize"><i class="fa-solid fa-window-minimize"></i></button>
             <button id="maximize"><i class="fa-solid fa-expand"></i></button>
